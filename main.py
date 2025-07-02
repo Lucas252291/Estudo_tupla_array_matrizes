@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def imprimir_valor_questao(valor):
     print(f"{"-"*30}\nQuestão {valor}")
 def formt():
@@ -198,46 +201,90 @@ formt()
 
 # 2.12 Dado o perfil de usuário {'username': 'bia_costa'}, adicione uma nova chave 'endereco'. O valor associado a essa chave deve ser outro dicionário contendo: 'rua': 'Rua das Flores, 123', 'cidade': 'São Paulo' e 'cep': '01000-000'.
 imprimir_valor_questao(2.12)
+usuario = {'username': 'bia_costa'}
+print(f"Usuario: {usuario}")
+endereco = {'rua': 'Rua das Flores, 123', 'cidade': 'São Paulo','cep': '01000-000'}
+usuario['endereco'] = endereco
+print(f"Usuario: {usuario}")
 
 formt()
 
 # 2.13 Dado o perfil de usuário {'username': 'bia_costa'}, adicione uma nova chave 'profissao'. O valor associado a essa chave deve ser outro dicionário contendo: 'cargo': 'Desenvolvedora', 'empresa': 'Tech Solutions'.
 imprimir_valor_questao(2.13)
-
+usuario = {'username': 'bia_costa'}
+print(f"Usuario: {usuario}")
+usuario['profissao'] = {'cargo': 'Desenvolvedora', 'empresa': 'Tech Solutions'}
+print(f"Usuario: {usuario}")
 formt()
 # 2.14 A partir do perfil de usuário com endereço e profissão aninhados da questão anterior, acesse e imprima apenas o valor associado à chave 'cidade'.
 imprimir_valor_questao(2.14)
+print(f"Usuario: {usuario}")
+usuario['endereco'] = endereco
+print(f"Usuario: {usuario}")
+print(f"Cidade: {usuario['endereco']['cidade']}")
 
 formt()
 # 2.15 Dado o perfil de usuário com endereço aninhado, atualize o valor da chave 'rua' para 'Avenida Principal, 456'.
 imprimir_valor_questao(2.15)
+print(f"Usuario: {usuario}")
+usuario['endereco']['rua'] = 'Avenida Principal, 456'
+print(f"Usuario: {usuario}")
 
 formt()
 # 2.16 Crie um dicionário para mapear coordenadas para nomes de locais. Use a tupla (-8.0578, -34.8829) como chave para o valor 'Recife' e a tupla (-23.5505, -46.6333) como chave para o valor 'São Paulo'.
 imprimir_valor_questao(2.16)
+locais = {'Recife':(-8.0578, -34.8829), 'São Paulo' :(-23.5505, -46.6333) }
+print(locais)
+
 
 formt()
 # 2.17 A partir do dicionário da questão anterior, adicione um novo local. A chave deve ser a tupla (-22.9068, -43.1729) e o valor deve ser 'Rio de Janeiro'.
 imprimir_valor_questao(2.17)
-
+print(locais)
+locais['Rio de Janeiro'] = (-22.9068, -43.1729)
+print(locais)
 formt()
+
 # 2.18 Escreva uma função que, dado um dicionário de locais, encontre o nome do local a partir de uma tupla de coordenadas. A função deve retornar uma mensagem padrão caso a coordenada não seja encontrada. Teste a função com as coordenadas (-23.5505, -46.6333) e (0, 0).
 imprimir_valor_questao(2.18)
+print(locais)
 
+def encontra_cidade(x,y):
+    for local in locais:
+        cord = locais[local][:]
+        if cord == (x, y):
+            return print(f"Cordenadas: {x},{y} | Cidade : {local}")
+    return  print(f"Cidade não encontrada aparti das cordenadas inseridas")
+
+encontra_cidade(-23.5505, -46.6333)
+encontra_cidade(0,0)
 formt()
 # Parte 3: Vetores (Listas e NumPy)
 # 3.1 Crie uma lista de hashtags (#) para redes sociais chamada tags_post com os valores ['#tecnologia', '#python', '#programacao']. Em seguida, adicione a tag '#dados' ao final da lista.
 imprimir_valor_questao(3.1)
+lista_hashtags = {'tags_post':['#tecnologia', '#python', '#programacao']}
+print(lista_hashtags)
+lista_hashtags['tags_post'].append('#dados')
+print(lista_hashtags)
 
 formt()
 # 3.2 Dada a lista de tags ['#tecnologia', '#python', '#programacao', '#dados'], remova o elemento '#programacao'.
 imprimir_valor_questao(3.2)
-
+print(lista_hashtags)
+lista_hashtags['tags_post'].remove('#programacao')
+print(lista_hashtags)
 formt()
+
 # 3.3 Dada a lista de tags ['#tecnologia', '#python', '#dados'], verifique se a string '#importante' existe na lista.
 imprimir_valor_questao(3.3)
+print(lista_hashtags)
+if '#importante'in lista_hashtags['tags_post']:
+    print("A hashtags #importante esta na lista")
+else:
+    print("A hashtags #importante não esta na lista")
 
 formt()
+
 # 3.4 Importe a biblioteca numpy com o alias np. Crie um array NumPy a partir da lista de itens vendidos da semana, em que os itens são tuplas representando (produto, quantidade): [('camiseta', 10), ('calça', 5), ('sapato', 2)].
 imprimir_valor_questao(3.4)
 
