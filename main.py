@@ -1,5 +1,5 @@
 import numpy as np
-
+from datetime import datetime
 
 def imprimir_valor_questao(valor):
     print(f"{"-"*30}\nQuestão {valor}")
@@ -287,30 +287,57 @@ formt()
 
 # 3.4 Importe a biblioteca numpy com o alias np. Crie um array NumPy a partir da lista de itens vendidos da semana, em que os itens são tuplas representando (produto, quantidade): [('camiseta', 10), ('calça', 5), ('sapato', 2)].
 imprimir_valor_questao(3.4)
+itens_vendidos = np.array([('camiseta', 10), ('calça', 5), ('sapato', 2)], dtype=[('produto', 'U20'), ('quantidade', 'i4')])
+print(itens_vendidos)
 
 formt()
 # 3.5 Crie um array NumPy para armazenar as seguintes pontuações de um aluno: [0.85, 0.92, 0.78, 0.95, 0.88].
 imprimir_valor_questao(3.5)
+pontuacao_alunos = np.array([0.85, 0.92, 0.78, 0.95, 0.88])
+print(f"Pontuação dos alunos: {pontuacao_alunos}")
 
 formt()
 # 3.6 Crie um array NumPy para armazenar as temperaturas em Celsius: [45.5, 46.0, 45.8, 47.1, 46.5].
 imprimir_valor_questao(3.6)
+temperaturas_celsius = np.array([45.5, 46.0, 45.8, 47.1, 46.5])
+print(f"Temperaturas em Celsius: {temperaturas_celsius}")
 
 formt()
 # 3.7 Dado o array NumPy com tuplas de itens e preços precos = np.array([(Sapato, 100.0), (Calça, 250.0), (Camiseta, 80.0), (Tênis, 150.0)]), crie um novo array aplicando um desconto de 10% a todos os elementos (multiplicando por 0.9).
 imprimir_valor_questao(3.7)
+precos = np.array([('Sapato', 100.0), ('Calça', 250.0), ('Camiseta', 80.0), ('Tênis', 150.0)], dtype=[('item', 'U20'), ('preco', 'f4')])
+desconto = 0.9  
+precos_com_desconto = np.array([(item, preco * desconto) for item, preco in precos])
+print("Preços com desconto:")
+for item, preco in precos_com_desconto:
+    print(f"{item} custava R${float(preco) / float(desconto):.2f}, agora custa R${float(preco):.2f}")        
 
 formt()
 # 3.8 Modifique o desconto aplicado acima para ser de 15% e imprima todos os valores originais e com desconto no formato, o <item> custava <preco_original>, agora custa <preco_com_desconto>.
 imprimir_valor_questao(3.8)
+precos_com_desconto = np.array([(item, preco * 0.85) for item, preco in precos])
+print("Preços com desconto de 15%:")
+for item, preco in precos_com_desconto:
+    print(f"{item} custava R${float(preco) / 0.85:.2f}, agora custa R${float(preco):.2f}")  
+
 
 formt()
 # 3.9 Dados o array de quantidades quantidades = np.array([1, 2, 3]) e o array de preços unitários precos_unitarios = np.array([15.0, 30.0, 22.5]), calcule o valor total por item multiplicando os dois arrays.
 imprimir_valor_questao(3.9)
-
+quantidades = np.array([1, 2, 3])
+precos_unitarios = np.array([15.0, 30.0, 22.5])
+valores_totais = quantidades * precos_unitarios 
+print("Valores totais por item:")
+for quantidade, preco_unitario, valor_total in zip(quantidades, precos_unitarios, valores_totais):
+    print(f"Quantidade: {quantidade}, Preço Unitário: R${preco_unitario:.2f}, Valor Total: R${valor_total:.2f}")
 formt()
 # 3.10 Dado o array de temperaturas em Celsius temperaturas_celsius = np.array([45.5, 46.0, 45.8, 47.1, 46.5]), converta todas as temperaturas para Fahrenheit usando a fórmula F = C * 1.8 + 32.
 imprimir_valor_questao(3.10)
+temperaturas_celsius = np.array([45.5, 46.0, 45.8, 47.1, 46.5])
+temperaturas_fahrenheit = temperaturas_celsius * 1.8 + 32
+print("Temperaturas em Fahrenheit:")
+for celsius, fahrenheit in zip(temperaturas_celsius, temperaturas_fahrenheit):
+    print(f"{celsius:.2f}°C = {fahrenheit:.2f}°F")
 
 formt()
 # Parte 4: Matrizes (NumPy)
@@ -320,6 +347,10 @@ formt()
 # [2, 6, 6]
 # [3, 3, 3].
 imprimir_valor_questao(4.1)
+matriz_vendas = np.array([[0, 1, 3], [9, 7, 4], [2, 6, 6], [3, 3, 3]])
+print(f"Matriz de vendas: \n{matriz_vendas}")
+
+
 
 formt()
 
@@ -327,47 +358,83 @@ formt()
 
 # 4.2 Usando a matriz de vendas da questão anterior, imprima seu formato (atributo .shape) e sua transposta (atributo .T).
 imprimir_valor_questao(4.2)
-
+print(f"Formato da matriz de vendas: {matriz_vendas.shape}")
+print(f"Matriz de vendas transposta: \n{matriz_vendas.T}")
 formt()
 # 4.3 Crie uma matriz NumPy 3x3 preenchida com zeros, com tipo de dado inteiro (dtype=int).
 imprimir_valor_questao(4.3)
+matriz_zeros = np.zeros((3, 3), dtype=int)
+print(f"Matriz 3x3 preenchida com zeros: \n{matriz_zeros}")
 
 formt()
 # 4.4 Dada a matriz de vendas da questão 4.1, extraia e imprima a linha completa de dados para o segundo produto (linha de índice 1).
 imprimir_valor_questao(4.4)
+print(f"Matriz de vendas: \n{matriz_vendas}")
+linha_produto_2 = matriz_vendas[1, :]
+print(f"Linha completa de dados para o segundo produto: {linha_produto_2}")
+
 
 formt()
 # 4.5 Usando a mesma matriz de vendas, extraia e imprima a coluna completa de dados para o terceiro mês (coluna de índice 2).
 imprimir_valor_questao(4.5)
+print(f"Matriz de vendas: \n{matriz_vendas}")
+coluna_mes_3 = matriz_vendas[:, 2]
+print(f"Coluna completa de dados para o terceiro mês: {coluna_mes_3}")
 
 formt()
 # 4.6 Ainda com a matriz de vendas, acesse e imprima o valor específico do produto 3 (linha 2) no mês 2 (coluna 1).
 imprimir_valor_questao(4.6)
+print(f"Matriz de vendas: \n{matriz_vendas}")
+valor_produto_3_mes_2 = matriz_vendas[2, 1]
+print(f"Valor específico do produto 3 no mês 2: {valor_produto_3_mes_2}")
 
 formt()
 # 4.7 Dada a matriz de preços matriz_precos = np.array([[10.00, 12.50], [25.00, 28.00]]), crie uma nova matriz com todos os preços aumentados em 5%.
 imprimir_valor_questao(4.7)
+matriz_precos = np.array([[10.00, 12.50], [25.00, 28.00]])
+print(f"Matriz de preços original: \n{matriz_precos}")
+matriz_precos_aumentada = matriz_precos * 1.05
+print(f"Matriz de preços com aumento de 5%: \n{matriz_precos_aumentada}")
 
 formt()
 # 4.8 Dadas as matrizes de vendas com a quantidade de vendas de 4 produtos nos primeiros 3 meses do ano, vendas_eua = np.array([[100, 150, 200], [80, 120, 160], [90, 110, 130], [70, 100, 140]]) e vendas_europa = np.array([[90, 140, 190], [70, 110, 150], [80, 100, 120], [60, 90, 130]]), some-as para criar uma matriz vendas_globais.
 imprimir_valor_questao(4.8)
+vendas_eua = np.array([[100, 150, 200], [80, 120, 160], [90, 110, 130], [70, 100, 140]])
+print(f"Matriz de vendas EUA: \n{vendas_eua}")
+vendas_europa = np.array([[90, 140, 190], [70, 110, 150], [80, 100, 120], [60, 90, 130]])
+print(f"Matriz de vendas Europa: \n{vendas_europa}")
+vendas_globais = vendas_eua + vendas_europa
+print(f"Matriz de vendas globais: \n{vendas_globais}")
+
 
 formt()
 # 4.9 Dada a matriz de vendas vendas_unidades = np.array([[100, 150], [80, 120], [90, 110]]) (3 produtos x 2 meses) e o vetor de preços precos = np.array([4.99, 5.25, 2.19]), calcule a receita total por mês usando o produto escalar (np.dot).
 imprimir_valor_questao(4.9)
-
+vendas_unidades = np.array([[100, 150], [80, 120], [90, 110]])
+print(f"Matriz de vendas unidades: \n{vendas_unidades}\n")
+precos = np.array([4.99, 5.25, 2.19])
+print(f"Vetor de preços dos produtos: \n{precos}\n")
+receita_mensal = np.dot(precos, vendas_unidades)
+print(f"Receita total por mês: \n{receita_mensal}")
 formt()
 # 4.10 Usando a matriz de vendas da questão 4.1, calcule o total de unidades vendidas em cada mês (soma ao longo do eixo 0).
 imprimir_valor_questao(4.10)
+print(f"Matriz de vendas: \n{matriz_vendas}")
+total_vendas_mensais = np.sum(matriz_vendas, axis=0)
+print(f"Total de unidades vendidas em cada mês: {total_vendas_mensais}")
 
 formt()
 # 4.11 Usando a mesma matriz de vendas, calcule a média de vendas para cada produto (média ao longo do eixo 1).
 imprimir_valor_questao(4.11)
-
+print(f"Matriz de vendas: \n{matriz_vendas}")
+media_vendas_produtos = np.mean(matriz_vendas, axis=1)
+print(f"Média de vendas para cada produto: {media_vendas_produtos}")
 formt()
 # 4.12 A partir da matriz de vendas, encontre e imprima o valor máximo.
 imprimir_valor_questao(4.12)
-
+print(f"Matriz de vendas: \n{matriz_vendas}")
+max_vendas = np.max(matriz_vendas)
+print(f"Valor máximo de vendas: {max_vendas}")
 formt()
 # Parte 5: Desafios Finais
 # Crie uma lista chamada usuarios contendo um dicionário para um usuário. Este dicionário deve ter: a chave 'id_usuario' com valor 101; a chave 'perfil' com um dicionário aninhado {'nome': 'Ana Silva', 'email': 'ana.s@email.com'}; a chave 'permissoes' com a tupla ('leitura', 'escrita'); e a chave 'mapa_calor_logins' com uma matriz NumPy de 7x24 preenchida com zeros. Implemente uma função registrar_login(usuario) que incremente o contador no mapa de calor do usuário correspondente ao dia e hora atuais.
@@ -377,6 +444,79 @@ formt()
 # Projete uma classe SocialGraph para gerenciar amizades. O construtor deve inicializar um dicionário self.conexoes. Implemente os métodos adicionar_amizade(id1, id2) para criar uma amizade mútua e obter_amigos(id_usuario) para retornar a lista de amigos. Instancie a classe e adicione as seguintes amizades: (101, 205), (101, 308), (205, 400). Teste o método obter_amigos para os usuários 101, 205 e 999.
 
 imprimir_valor_questao(5)
+usuarios = [{
+    'id_usuario': 101,
+    'perfil': {
+        'nome': 'Ana Silva',
+        'email': 'ana.s@email.com'
+    },
+    'permissoes': ('leitura', 'escrita'),
+    'mapa_calor_logins': np.zeros((7, 24), dtype=int)  
+}]
+
+def registrar_login(usuario):
+    agora = datetime.now()
+    dia_semana = agora.weekday() 
+    hora = agora.hour
+    usuario['mapa_calor_logins'][dia_semana][hora] += 1
+
+registrar_login(usuarios[0])
+print(usuarios[0]['mapa_calor_logins']) 
+
+def analisar_inventario(catalogo):
+    valor_total = 0
+    produto_mais_caro = None
+    preco_max = float('-inf')
+    sem_estoque = []
+
+    for nome, dados in catalogo.items():
+        preco = dados['preco']
+        estoque = dados['estoque']
+        valor_total += preco * estoque
+
+        if preco > preco_max:
+            preco_max = preco
+            produto_mais_caro = nome
+
+        if estoque == 0:
+            sem_estoque.append(nome)
+
+    return valor_total, produto_mais_caro, sem_estoque
+
+catalogo = {
+    'Laptop Gamer': {'preco': 7500.00, 'estoque': 10},
+    'Mouse Vertical': {'preco': 350.00, 'estoque': 50},
+    'Monitor 4K': {'preco': 4200.00, 'estoque': 15},
+    'Webcam HD': {'preco': 250.00, 'estoque': 0}
+}
+
+resultado = analisar_inventario(catalogo)
+print(resultado)
+
+class SocialGraph:
+    def __init__(self):
+        self.conexoes = {}
+
+    def adicionar_amizade(self, id1, id2):
+        if id1 not in self.conexoes:
+            self.conexoes[id1] = set()
+        self.conexoes[id1].add(id2)
+        if id2 not in self.conexoes:
+            self.conexoes[id2] = set()
+        self.conexoes[id2].add(id1)
+
+    def obter_amigos(self, id_usuario):
+        return list(self.conexoes.get(id_usuario, []))
+
+rede = SocialGraph()
+rede.adicionar_amizade(101, 205)
+rede.adicionar_amizade(101, 308)
+rede.adicionar_amizade(205, 400)
+
+print("Amigos do 101:", rede.obter_amigos(101))  
+print("Amigos do 205:", rede.obter_amigos(205)) 
+print("Amigos do 999:", rede.obter_amigos(999))  
+
 
 formt()
 
